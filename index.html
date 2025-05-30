@@ -3,25 +3,30 @@
 <head>
     <title>PUSH TO SCREAM</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .scream-box { margin-top: 30px; }
-        .product, .membership { border: 1px solid #ddd; padding: 15px; margin: 15px; display: inline-block; width: 250px; }
         body {
-    background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
-    color: #fff;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-.scream-box {
-    margin-top: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    display: inline-block;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
+            background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+        .scream-box {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px;
+            display: inline-block;
+            width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -34,73 +39,57 @@
         <br><br>
         <button onclick="scream()">SCREAM!</button>
     </div>
-<div class="scream-box">
-    <input type="text" id="screamText" placeholder="Type your scream..." style="width: 300px; padding: 10px;">
-    <button onclick="scream()">SCREAM!</button>
-</div>
 
-<div id="space-container" style="position: relative; width: 100%; height: 300px; overflow: hidden; margin-top: 20px;"></div>
-
+    <div id="space-container" style="position: relative; width: 100%; height: 300px; overflow: hidden; margin-top: 20px;"></div>
 
     <audio id="screamSound">
-    <source src="https://kafree708.github.io/scream/man-scream-11-278818.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+        <source src="https://kafree708.github.io/scream/man-scream-11-278818.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
         function scream() {
-            let text = document.getElementById('screamText').value;
-            if (text.trim() === "") {
+            let textInput = document.getElementById('screamText');
+            let text = textInput.value.trim();
+            if (text === "") {
                 alert("You need to type something!");
                 return;
             }
-            document.getElementById('screamSound').play();
+
+            // Play scream sound
+            let screamSound = document.getElementById('screamSound');
+            screamSound.volume = 1.0;
+            screamSound.currentTime = 0;
+            screamSound.play().catch((error) => {
+                console.log('Playback error:', error);
+            });
+
+            // Create floating word element
+            let spaceContainer = document.getElementById('space-container');
+            let word = document.createElement('div');
+            word.textContent = text;
+            word.style.position = 'absolute';
+            word.style.left = Math.random() * (spaceContainer.offsetWidth - 100) + 'px';
+            word.style.bottom = '0px';
+            word.style.fontSize = '24px';
+            word.style.color = '#fff';
+            word.style.transition = 'transform 3s ease, opacity 3s ease';
+            word.style.transform = 'translateY(-300px) rotate(720deg)';
+            word.style.opacity = '0';
+
+            spaceContainer.appendChild(word);
+
+            // Remove the word after animation
             setTimeout(() => {
-                alert("ECHO: " + text.toUpperCase() + "!!!");
-            }, 500);
+                spaceContainer.removeChild(word);
+            }, 3000);
+
+            // Clear input box
+            textInput.value = '';
         }
-    
-   function scream() {
-    let textInput = document.getElementById('screamText');
-    let text = textInput.value.trim();
-    if (text === "") {
-        alert("You need to type something!");
-        return;
-    }
+    </script>
 
-    // Play scream sound
-    let screamSound = document.getElementById('screamSound');
-    screamSound.volume = 1.0;
-    screamSound.currentTime = 0;
-    screamSound.play().catch((error) => {
-        console.log('Playback error:', error);
-    });
-
-    // Create floating word element
-    let spaceContainer = document.getElementById('space-container');
-    let word = document.createElement('div');
-    word.textContent = text;
-    word.style.position = 'absolute';
-    word.style.left = Math.random() * (spaceContainer.offsetWidth - 100) + 'px';
-    word.style.bottom = '0px';
-    word.style.fontSize = '24px';
-    word.style.color = '#fff';
-    word.style.transition = 'transform 3s ease, opacity 3s ease';
-    word.style.transform = 'translateY(-300px) rotate(720deg)';
-    word.style.opacity = '0';
-
-    spaceContainer.appendChild(word);
-
-    // Remove the word after animation
-    setTimeout(() => {
-        spaceContainer.removeChild(word);
-    }, 3000);
-
-    // Clear input box
-    textInput.value = '';
-}
-        </script>
- <h2>🎁 Affiliate Picks 🎁</h2>
+    <h2>🎁 Affiliate Picks 🎁</h2>
     <div class="product">
         <h3>Noise-Canceling Headphones</h3>
         <a href="https://amzn.to/43S0yPw">Check on Amazon →</a>
