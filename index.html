@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I Scream, You Scream</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        .scream-box { margin-top: 30px; }
+        .product, .membership { border: 1px solid #ddd; padding: 15px; margin: 15px; display: inline-block; width: 250px; }
+    </style>
+</head>
+<body>
+    <h1>💥 I Scream, You Scream 💥</h1>
+    <p>Type what’s bothering you, click scream, and let it out! Upgrade for premium screams!</p>
+
+    <div class="scream-box">
+        <input type="text" id="screamText" placeholder="Type your scream..." style="width: 300px; padding: 10px;">
+        <br><br>
+        <button onclick="scream()">SCREAM!</button>
+    </div>
+
+    <audio id="screamSound">
+        <source src="https://www.soundjay.com/human/screaming-female-01.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function scream() {
+            let text = document.getElementById('screamText').value;
+            if (text.trim() === "") {
+                alert("You need to type something!");
+                return;
+            }
+            document.getElementById('screamSound').play();
+            setTimeout(() => {
+                alert("ECHO: " + text.toUpperCase() + "!!!");
+            }, 500);
+        }
+    </script>
+
+    <h2>🎁 Affiliate Picks 🎁</h2>
+    <div class="product">
+        <h3>Noise-Canceling Headphones</h3>
+        <a href="YOUR_AFFILIATE_LINK">Check on Amazon →</a>
+    </div>
+    <div class="product">
+        <h3>Stress Relief Ball</h3>
+        <a href="YOUR_AFFILIATE_LINK">Shop Now →</a>
+    </div>
+
+    <h2>🌟 Become a Premium Screamer 🌟</h2>
+    <div class="membership">
+        <h3>One-Time Pass</h3>
+        <p>$4.99 → Unlock Baby & Child Screams</p>
+        <button onclick="window.location.href='YOUR_PAYMENT_LINK'">Get Access</button>
+    </div>
+    <div class="membership">
+        <h3>Yearly Membership</h3>
+        <p>$29.99/year → Access ALL screams + VIP perks</p>
+        <button onclick="window.location.href='YOUR_PAYMENT_LINK'">Join Now</button>
+    </div>
+
+    <footer style="margin-top: 50px; font-size: 12px;">
+        <p>&copy; 2025 I Scream, You Scream. As an affiliate, we may earn commissions.</p>
+    </footer>
+</body>
+</html>
