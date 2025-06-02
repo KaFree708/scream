@@ -29,24 +29,30 @@
         }
         #screamStream {
             max-height: 300px;
-            overflow-y: scroll;
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: scrollUp 20s linear infinite;
+        }
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
         }
     </style>
 </head>
 <body>
     <h1>💥 PushToScream 💥</h1>
     <h2>Scream Stream</h2>
+
     <div class="scream-box">
         <input type="text" id="screamText" placeholder="Type your scream..." style="width: 300px; padding: 10px;">
         <br><br>
         <button onclick="scream()">SCREAM!</button>
     </div>
 
-    <h2 style="margin-top: 30px;">🎁 Affiliate Picks 🎁</h2>
+    <!-- Affiliate Section 1 -->
+    <h2 style="margin-top: 30px;">🎧 Chill Out Picks 🎧</h2>
     <div class="product">
         <h3>Noise-Canceling Headphones</h3>
         <a href="https://amzn.to/43S0yPw" target="_blank">Check on Amazon →</a>
@@ -56,8 +62,20 @@
         <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
     </div>
 
+    <!-- Scream Stream Display -->
     <div id="screamStream">
         <h3>Latest Screams:</h3>
+    </div>
+
+    <!-- Affiliate Section 2 -->
+    <h2 style="margin-top: 30px;">💡 Fun Stress Busters 💡</h2>
+    <div class="product">
+        <h3>White Noise Machine</h3>
+        <a href="https://amzn.to/3QcJ0K5" target="_blank">View on Amazon →</a>
+    </div>
+    <div class="product">
+        <h3>Scream Pillow</h3>
+        <a href="https://amzn.to/3Qg0Y2B" target="_blank">Get Yours →</a>
     </div>
 
     <audio id="screamSound">
@@ -80,6 +98,8 @@
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
+
+        const fonts = ["Arial", "Courier New", "Comic Sans MS", "Georgia", "Impact", "Times New Roman", "Verdana"];
 
         function scream() {
             let textInput = document.getElementById('screamText');
@@ -106,7 +126,17 @@
             let scream = snapshot.val().message;
             let screamItem = document.createElement('div');
             screamItem.textContent = scream;
-            document.getElementById('screamStream').appendChild(screamItem);
+
+            let randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            screamItem.style.fontFamily = randomFont;
+            screamItem.style.marginBottom = '10px';
+
+            const stream = document.getElementById('screamStream');
+            stream.appendChild(screamItem);
+
+            while (stream.children.length > 21) { // 21 because of the <h3> title
+                stream.removeChild(stream.children[1]); // always remove the first scream (skip the header)
+            }
         });
     </script>
 </body>
