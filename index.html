@@ -11,7 +11,7 @@
             padding: 50px;
         }
         .scream-box {
-            margin-top: 30px;
+            margin-top: 20px;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
@@ -21,7 +21,7 @@
         .product {
             border: 1px solid #ddd;
             padding: 15px;
-            margin: 15px;
+            margin: 10px;
             display: inline-block;
             width: 250px;
             background: rgba(255, 255, 255, 0.1);
@@ -45,7 +45,7 @@
         #screamStream {
             display: flex;
             flex-direction: column;
-            animation: scrollUp 8s linear infinite; /* Faster scroll */
+            animation: scrollUp 6s linear infinite; /* slightly faster */
         }
         @keyframes scrollUp {
             0% { transform: translateY(0); }
@@ -55,10 +55,11 @@
 </head>
 <body>
     <h1>💥 PushToScream 💥</h1>
-    
-    <!-- Instructions -->
-    <p>💬 Type your scream below, then hit the SCREAM button!  
-    Watch your words blast onto the live Scream Stream with others.</p>
+    <h2>Scream Stream</h2>
+
+    <!-- Clear Instructions -->
+    <p>💬 Type your scream below and click the SCREAM button!  
+    Your words will echo live on the Scream Stream below for everyone to see.</p>
 
     <!-- Scream input + button -->
     <div class="scream-box">
@@ -67,7 +68,7 @@
         <button onclick="scream()">SCREAM!</button>
     </div>
 
-    <!-- Affiliate Section 1 -->
+    <!-- Affiliate Section -->
     <h2 style="margin-top: 30px;">🎧 Chill Out Picks 🎧</h2>
     <div class="product">
         <h3>Noise-Canceling Headphones</h3>
@@ -77,7 +78,7 @@
         <h3>Stress Relief Ball</h3>
         <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
     </div>
-     <div class="product">
+    <div class="product">
         <h3>White Noise Machine</h3>
         <a href="https://amzn.to/3QcJ0K5" target="_blank">View on Amazon →</a>
     </div>
@@ -85,30 +86,13 @@
         <h3>Scream Pillow</h3>
         <a href="https://amzn.to/3Qg0Y2B" target="_blank">Get Yours →</a>
     </div>
+
     <!-- Scream Stream Section -->
     <div id="screamStreamContainer">
-        <div id="screamStreamTitle">SCREAM STREAM:</div>
+        <div id="screamStreamTitle">🔥 Latest Screams 🔥</div>
         <div id="screamStream"></div>
     </div>
 
-    <!-- Affiliate Section 2 -->
-    <h2 style="margin-top: 30px;">💡 Fun Stress Busters 💡</h2>
-    <div class="product">
-        <h3>White Noise Machine</h3>
-        <a href="https://amzn.to/3QcJ0K5" target="_blank">View on Amazon →</a>
-    </div>
-    <div class="product">
-        <h3>Scream Pillow</h3>
-        <a href="https://amzn.to/3Qg0Y2B" target="_blank">Get Yours →</a>
-    </div>
-     <div class="product">
-        <h3>Noise-Canceling Headphones</h3>
-        <a href="https://amzn.to/43S0yPw" target="_blank">Check on Amazon →</a>
-    </div>
-    <div class="product">
-        <h3>Stress Relief Ball</h3>
-        <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
-    </div>
     <!-- Audio -->
     <audio id="screamSound">
         <source src="https://kafree708.github.io/scream/man-scream-11-278818.mp3" type="audio/mpeg">
@@ -174,3 +158,4 @@
     </script>
 </body>
 </html>
+
