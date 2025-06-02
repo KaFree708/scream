@@ -45,7 +45,7 @@
         #screamStream {
             display: flex;
             flex-direction: column;
-            animation: scrollUp 6s linear infinite; /* slightly faster */
+            animation: scrollUp 6s linear infinite;
         }
         @keyframes scrollUp {
             0% { transform: translateY(0); }
@@ -139,6 +139,37 @@
             textInput.value = '';
         }
 
+        // Preload starter screams — comment this out after first run!
+        const starterScreams = [
+            "WHY IS MY WIFI SO SLOOOOOOW?!?!",
+            "Mondays… I CAN’T TAKE ANOTHER MONDAY!!",
+            "LEAVE ME ALONEEEEEE 😫😫😫",
+            "stop. eating. MY. SNACKS.",
+            "WHYYYYYYYYYYYYY",
+            "I screamed… you didn’t hear… so here it is!!",
+            "This is my silent scream because I can’t yell at work",
+            "AAAAAAHHHHHHHHHH!!!!!!!",
+            "Can’t handle the group chat today 😤",
+            "When will the drama end?! WHEN?!?!",
+            "HELP!! My brain is fried 🤯",
+            "why do socks disappear in the laundry 😭😭",
+            "GRRRRRRRRRRRR!!",
+            "Is it FRIDAY yet?!",
+            "Screaming because… life be lifing.",
+            "My little brother touched my stuff again 😡",
+            "I’m fine. IT’S FINE. EVERYTHING’S FINE.",
+            "Deadline panic scream!!! 😱😱",
+            "Just. Need. Coffee. ☕☕☕",
+            "Stress level: 💯💯💯 screaming inside!"
+        ];
+
+        starterScreams.forEach(text => {
+            db.ref('screams').push({
+                message: text,
+                timestamp: Date.now()
+            });
+        });
+
         db.ref('screams').limitToLast(20).on('child_added', snapshot => {
             let scream = snapshot.val().message;
             let screamItem = document.createElement('div');
@@ -158,4 +189,5 @@
     </script>
 </body>
 </html>
+
 
