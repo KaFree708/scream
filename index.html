@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PUSH TO SCREAM</title>
+    <title>Push To Scream - Scream Stream</title>
     <style>
         body {
             background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
@@ -27,13 +27,19 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
+        #screamStream {
+            max-height: 300px;
+            overflow-y: scroll;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>💥 I Scream, You Scream 💥</h1>
-    <h2>PUSH TO SCREAM</h2>
-    <p>Type what’s bothering you, click scream, and let it out!</p>
-
+    <h1>💥 PushToScream 💥</h1>
+    <h2>Scream Stream</h2>
     <div class="scream-box">
         <input type="text" id="screamText" placeholder="Type your scream..." style="width: 300px; padding: 10px;">
         <br><br>
@@ -49,23 +55,16 @@
         <h3>Stress Relief Ball</h3>
         <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
     </div>
-    <div class="product">
-        <h3>White Noise Machine</h3>
-        <a href="https://amzn.to/4l6Dcf9" target="_blank">View on Amazon →</a>
-    </div>
-    <div class="product">
-        <h3>Scream Pillow</h3>
-        <a href="https://amzn.to/4jsqRAn" target="_blank">Get Yours →</a>
-    </div>
 
-    <div id="space-container" style="position: relative; width: 100%; height: 300px; overflow: hidden; margin-top: 20px;"></div>
+    <div id="screamStream">
+        <h3>Latest Screams:</h3>
+    </div>
 
     <audio id="screamSound">
         <source src="https://kafree708.github.io/scream/man-scream-11-278818.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- Firebase scripts + config -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script>
@@ -90,55 +89,25 @@
                 return;
             }
 
-            // Save to Firebase
             db.ref('screams').push({
                 message: text,
                 timestamp: Date.now()
             });
 
-            // Play scream sound
             let screamSound = document.getElementById('screamSound');
             screamSound.volume = 1.0;
             screamSound.currentTime = 0;
-            screamSound.play().catch((error) => {
-                console.log('Playback error:', error);
-            });
+            screamSound.play();
 
-            // Create floating word element
-            let spaceContainer = document.getElementById('space-container');
-            let word = document.createElement('div');
-            word.textContent = text;
-            word.style.position = 'absolute';
-            word.style.left = Math.random() * (spaceContainer.offsetWidth - 100) + 'px';
-            word.style.bottom = '0px';
-            word.style.fontSize = '24px';
-            word.style.color = '#fff';
-            word.style.transition = 'transform 3s ease, opacity 3s ease';
-            word.style.transform = 'translateY(-300px) rotate(720deg)';
-            word.style.opacity = '0';
-
-            spaceContainer.appendChild(word);
-
-            // Remove the word after animation
-            setTimeout(() => {
-                spaceContainer.removeChild(word);
-            }, 3000);
-
-            // Clear input box
             textInput.value = '';
         }
 
-        // Load latest screams into space container (optional display area)
         db.ref('screams').limitToLast(20).on('child_added', snapshot => {
             let scream = snapshot.val().message;
             let screamItem = document.createElement('div');
             screamItem.textContent = scream;
-            document.getElementById('space-container').appendChild(screamItem);
+            document.getElementById('screamStream').appendChild(screamItem);
         });
     </script>
-
-    <footer style="margin-top: 50px; font-size: 12px;">
-        <p>&copy; 2025 I Scream, You Scream. As an affiliate, we may earn commissions.</p>
-    </footer>
 </body>
 </html>
