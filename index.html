@@ -30,26 +30,22 @@
         #screamStreamContainer {
             width: 80%;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 30px auto;
             background: rgba(0,0,0,0.3);
             padding: 10px;
             border-radius: 10px;
-            margin-top: 30px;
             overflow: hidden;
             height: 200px;
             position: relative;
         }
         #screamStreamTitle {
-            position: absolute;
-            top: 10px;
-            width: 100%;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         #screamStream {
-            position: absolute;
-            top: 40px;
-            width: 100%;
-            animation: scrollUp 20s linear infinite;
+            display: flex;
+            flex-direction: column;
+            animation: scrollUp 8s linear infinite; /* Faster scroll */
         }
         @keyframes scrollUp {
             0% { transform: translateY(0); }
@@ -61,6 +57,11 @@
     <h1>💥 PushToScream 💥</h1>
     <h2>Scream Stream</h2>
 
+    <!-- Instructions -->
+    <p>💬 Type your scream below, then hit the SCREAM button!  
+    Watch your words blast onto the live Scream Stream with others.</p>
+
+    <!-- Scream input + button -->
     <div class="scream-box">
         <input type="text" id="screamText" placeholder="Type your scream..." style="width: 300px; padding: 10px;">
         <br><br>
@@ -77,10 +78,17 @@
         <h3>Stress Relief Ball</h3>
         <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
     </div>
-
-    <!-- Scream Stream Container -->
+     <div class="product">
+        <h3>White Noise Machine</h3>
+        <a href="https://amzn.to/3QcJ0K5" target="_blank">View on Amazon →</a>
+    </div>
+    <div class="product">
+        <h3>Scream Pillow</h3>
+        <a href="https://amzn.to/3Qg0Y2B" target="_blank">Get Yours →</a>
+    </div>
+    <!-- Scream Stream Section -->
     <div id="screamStreamContainer">
-        <div id="screamStreamTitle">Latest Screams:</div>
+        <div id="screamStreamTitle">SCREAM STREAM:</div>
         <div id="screamStream"></div>
     </div>
 
@@ -94,12 +102,21 @@
         <h3>Scream Pillow</h3>
         <a href="https://amzn.to/3Qg0Y2B" target="_blank">Get Yours →</a>
     </div>
-
+     <div class="product">
+        <h3>Noise-Canceling Headphones</h3>
+        <a href="https://amzn.to/43S0yPw" target="_blank">Check on Amazon →</a>
+    </div>
+    <div class="product">
+        <h3>Stress Relief Ball</h3>
+        <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
+    </div>
+    <!-- Audio -->
     <audio id="screamSound">
         <source src="https://kafree708.github.io/scream/man-scream-11-278818.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Firebase Setup -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script>
@@ -158,4 +175,3 @@
     </script>
 </body>
 </html>
-
