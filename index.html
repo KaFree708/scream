@@ -27,12 +27,28 @@
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
         }
-        #screamStream {
-            max-height: 300px;
+        #screamStreamContainer {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 30px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            height: 200px;
+            position: relative;
+        }
+        #screamStreamTitle {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            font-weight: bold;
+        }
+        #screamStream {
+            position: absolute;
+            top: 40px;
+            width: 100%;
             animation: scrollUp 20s linear infinite;
         }
         @keyframes scrollUp {
@@ -62,9 +78,10 @@
         <a href="https://amzn.to/45wIDPE" target="_blank">Shop Now →</a>
     </div>
 
-    <!-- Scream Stream Display -->
-    <div id="screamStream">
-        <h3>Latest Screams:</h3>
+    <!-- Scream Stream Container -->
+    <div id="screamStreamContainer">
+        <div id="screamStreamTitle">Latest Screams:</div>
+        <div id="screamStream"></div>
     </div>
 
     <!-- Affiliate Section 2 -->
@@ -134,10 +151,11 @@
             const stream = document.getElementById('screamStream');
             stream.appendChild(screamItem);
 
-            while (stream.children.length > 21) { // 21 because of the <h3> title
-                stream.removeChild(stream.children[1]); // always remove the first scream (skip the header)
+            while (stream.children.length > 20) {
+                stream.removeChild(stream.children[0]);
             }
         });
     </script>
 </body>
 </html>
+
